@@ -1,16 +1,28 @@
 from components.FileReader import FileReader
-from components.NumbersToMnemo import NumbersToMnemo
+from components.NumberToMnemo import NumberToMnemo
+from components.MnemoToNumber import MnemoToNumber
 
 
-def numbers_to_mnemo_module():
-    input_number = input('\n Enter number: ')
+def number_to_mnemo_module():
+    input_number = input("\n Enter number: ")
 
     if not input_number.isdigit():
-        print('You fucked up! NUMBERS idiot!')
+        print("You fucked up! NUMBERS idiot!")
         return
 
-    numbers_to_mnemo = NumbersToMnemo(input_number, file_reader)
-    print(numbers_to_mnemo.get_split_number())
+    number_to_mnemo = NumberToMnemo(input_number, file_reader)
+    print(number_to_mnemo.get_mnemo_words())
+
+
+def mnemo_to_number_module():
+    input_mnemo = input("\n Enter mnemo: ")
+
+    if not input_mnemo.replace(' ', '').isalpha():
+        print("No numbers, please!")
+        return
+
+    mnemo_to_number = MnemoToNumber(input_mnemo, file_reader)
+    print(mnemo_to_number.get_number())
 
 
 # START HERE
@@ -20,13 +32,11 @@ if __name__ == '__main__':
         exit()
 
 while True:
-    branch = input('\n Do you want to insert a number(n) or words(w)? ')
+    branch = input('\n Do you want to insert a number(n) or a mnemonic(m)? ')
 
     if branch == 'n':
-        numbers_to_mnemo_module()
-
-    elif branch == 'w':
-        # TODO
-        print("bla")
+        number_to_mnemo_module()
+    elif branch == 'm':
+        mnemo_to_number_module()
     else:
-        print("WTF are you dumb?! It's n or w!!!!")
+        print("WTF are you dumb?! It's n or m!!!!")

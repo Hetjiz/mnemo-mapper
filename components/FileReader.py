@@ -8,6 +8,5 @@ class FileReader(dict):
 
         with open("number_word_pairs.txt", 'r') as file:
             for line in file:
-                line = line.strip()
-                number, word = line.split()
+                number, word = line.strip().lower().split()
                 self[number] = word
